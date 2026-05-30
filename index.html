@@ -434,13 +434,39 @@
             <div class="text-gray-500 text-sm text-center md:text-right">
                 <p>&copy; <span id="year"></span> <span data-i18n="footer_rights">OZCONSULT. All rights reserved.</span></p>
                 <div class="mt-1 space-x-3">
-                    <a href="#" data-i18n="footer_privacy" class="hover:text-gray-900 dark:hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="javascript:void(0)" id="footer-privacy-btn" data-i18n="footer_privacy" class="hover:text-gray-900 dark:hover:text-white transition-colors">Privacy Policy</a>
                     <span>|</span>
-                    <a href="#" data-i18n="footer_terms" class="hover:text-gray-900 dark:hover:text-white transition-colors">Terms of Service</a>
+                    <a href="javascript:void(0)" id="footer-terms-btn" data-i18n="footer_terms" class="hover:text-gray-900 dark:hover:text-white transition-colors">Terms of Service</a>
                 </div>
             </div>
         </div>
     </footer>
+
+    <!-- Modal for Privacy Policy / Terms of Service -->
+    <div id="info-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4">
+        <!-- Backdrop -->
+        <div id="modal-backdrop" class="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-300"></div>
+        <!-- Content Container -->
+        <div class="relative bg-white dark:bg-brand-navy w-full max-w-3xl max-h-[85vh] rounded-sm shadow-2xl border border-gray-200 dark:border-brand-slate flex flex-col z-10 transition-all duration-300 transform scale-95 opacity-0" id="modal-card">
+            <!-- Modal Header -->
+            <div class="flex justify-between items-center p-6 border-b border-gray-200 dark:border-brand-slate shrink-0">
+                <h3 id="modal-title" class="font-serif text-2xl font-bold text-gray-900 dark:text-white"></h3>
+                <button id="modal-close-btn" class="text-gray-500 hover:text-brand-gold dark:text-gray-400 dark:hover:text-brand-gold transition-colors focus:outline-none">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            <!-- Modal Body (Scrollable) -->
+            <div id="modal-body" class="p-8 overflow-y-auto text-gray-600 dark:text-gray-300 text-sm leading-relaxed space-y-6 font-light">
+                <!-- Content injected dynamically -->
+            </div>
+            <!-- Modal Footer -->
+            <div class="p-6 border-t border-gray-200 dark:border-brand-slate flex justify-end shrink-0">
+                <button id="modal-close-btn-footer" class="bg-brand-gold hover:bg-brand-goldHover text-white dark:text-brand-dark px-6 py-2.5 rounded-sm font-semibold transition-all">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- Scripts -->
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -451,6 +477,60 @@
         
         // Set current year
         document.getElementById('year').textContent = new Date().getFullYear();
+
+        // --- Modal Logic ---
+        const infoModal = document.getElementById('info-modal');
+        const modalBackdrop = document.getElementById('modal-backdrop');
+        const modalCard = document.getElementById('modal-card');
+        const modalTitle = document.getElementById('modal-title');
+        const modalBody = document.getElementById('modal-body');
+        const modalCloseBtn = document.getElementById('modal-close-btn');
+        const modalCloseBtnFooter = document.getElementById('modal-close-btn-footer');
+        const privacyBtn = document.getElementById('footer-privacy-btn');
+        const termsBtn = document.getElementById('footer-terms-btn');
+
+        function openModal(type) {
+            const currentLang = localStorage.getItem('preferredLanguage') || 'en';
+            const titleKey = type === 'privacy' ? 'privacy_title' : 'terms_title';
+            const bodyKey = type === 'privacy' ? 'privacy_body' : 'terms_body';
+            
+            modalTitle.textContent = translations[currentLang][titleKey] || '';
+            modalBody.innerHTML = translations[currentLang][bodyKey] || '';
+            
+            modalCloseBtnFooter.textContent = currentLang === 'tr' ? 'Kapat' : 'Close';
+
+            infoModal.classList.remove('hidden');
+            infoModal.classList.add('flex');
+            setTimeout(() => {
+                modalCard.classList.remove('scale-95', 'opacity-0');
+                modalCard.classList.add('scale-100', 'opacity-100');
+            }, 10);
+            
+            document.body.classList.add('overflow-hidden');
+            lucide.createIcons();
+        }
+
+        function closeModal() {
+            modalCard.classList.remove('scale-100', 'opacity-100');
+            modalCard.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                infoModal.classList.remove('flex');
+                infoModal.classList.add('hidden');
+                document.body.classList.remove('overflow-hidden');
+            }, 300);
+        }
+
+        if (privacyBtn) privacyBtn.addEventListener('click', () => openModal('privacy'));
+        if (termsBtn) termsBtn.addEventListener('click', () => openModal('terms'));
+        if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeModal);
+        if (modalCloseBtnFooter) modalCloseBtnFooter.addEventListener('click', closeModal);
+        if (modalBackdrop) modalBackdrop.addEventListener('click', closeModal);
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !infoModal.classList.contains('hidden')) {
+                closeModal();
+            }
+        });
 
         // Navbar scroll effect
         const navbar = document.getElementById('navbar');
