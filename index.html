@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OZCONSULT | Executive B2B Sales Consulting</title>
+    <meta name="description" content="High-level sales mentorship, strategic advisory, and B2B sales coaching by Ediz Özdemir, ex-ABB Sales General Director.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- External CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#0a0f1c',
+                            navy: '#111827',
+                            slate: '#1f2937',
+                            gold: '#c5a059',
+                            goldHover: '#d4af6a',
+                            light: '#f3f4f6',
+                            white: '#ffffff',
+                            graylight: '#f9fafb'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans bg-brand-graylight dark:bg-brand-dark text-gray-900 dark:text-brand-light antialiased selection:bg-brand-gold selection:text-brand-dark transition-colors duration-300">
+
+    <!-- 1. Navigation Bar -->
+    <header class="fixed w-full top-0 z-50 transition-all duration-300" id="navbar">
+        <div class="glass border-b border-gray-200 dark:border-brand-slate transition-colors duration-300">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-20">
+                    <!-- Logo -->
+                    <div class="flex-shrink-0 flex items-center">
+                        <a href="#" class="font-serif text-2xl font-bold tracking-wider text-gray-900 dark:text-white">
+                            OZ<span class="text-brand-gold">CONSULT</span>
+                        </a>
+                    </div>
+                    
+                    <!-- Desktop Menu -->
+                    <nav class="hidden md:flex space-x-8 items-center">
+                        <a href="#about" data-i18n="nav_about" class="text-gray-600 dark:text-gray-300 hover:text-brand-gold dark:hover:text-brand-gold transition-colors text-sm font-medium tracking-wide">About</a>
+                        <a href="#services" data-i18n="nav_services" class="text-gray-600 dark:text-gray-300 hover:text-brand-gold dark:hover:text-brand-gold transition-colors text-sm font-medium tracking-wide">Services</a>
+                        <a href="#value" data-i18n="nav_value" class="text-gray-600 dark:text-gray-300 hover:text-brand-gold dark:hover:text-brand-gold transition-colors text-sm font-medium tracking-wide">Value</a>
+                        
+                        <!-- Actions -->
+                        <div class="flex items-center space-x-4 border-l border-gray-300 dark:border-gray-700 pl-4">
+                            <!-- Lang -->
+                            <select id="lang-switcher" class="bg-transparent border border-gray-300 dark:border-gray-700 rounded-sm text-sm text-gray-700 dark:text-gray-300 px-2 py-1 focus:outline-none focus:border-brand-gold cursor-pointer transition-colors">
+                                <option value="en" class="text-gray-900">EN</option>
+                                <option value="tr" class="text-gray-900">TR</option>
+                            </select>
+                            
+                            <!-- Theme Toggle -->
+                            <button id="theme-toggle" class="text-gray-600 dark:text-gray-300 hover:text-brand-gold dark:hover:text-brand-gold focus:outline-none transition-colors">
+                                <i data-lucide="moon" id="theme-icon" class="w-5 h-5"></i>
+                            </button>
+                        </div>
+
+                        <a href="#contact" class="bg-brand-gold hover:bg-brand-goldHover text-white dark:text-brand-dark px-6 py-2.5 rounded-sm font-semibold transition-all shadow-lg hover:shadow-brand-gold/20 flex items-center gap-2">
+                            <span data-i18n="nav_book">Book a Session</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </a>
+                    </nav>
+
+                    <!-- Mobile actions -->
+                    <div class="md:hidden flex items-center space-x-4">
+                        <!-- Theme Toggle Mobile -->
+                        <button id="theme-toggle-mobile" class="text-gray-600 dark:text-gray-300 hover:text-brand-gold focus:outline-none">
+                            <i data-lucide="moon" id="theme-icon-mobile" class="w-5 h-5"></i>
+                        </button>
+                        <select id="lang-switcher-mobile" class="bg-transparent border border-gray-300 dark:border-gray-700 rounded-sm text-sm text-gray-700 dark:text-gray-300 px-1 py-1 focus:outline-none focus:border-brand-gold cursor-pointer transition-colors">
+                            <option value="en" class="text-gray-900">EN</option>
+                            <option value="tr" class="text-gray-900">TR</option>
+                        </select>
+                        <button id="mobile-menu-btn" class="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white focus:outline-none">
+                            <i data-lucide="menu" class="w-6 h-6"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-brand-navy border-t border-gray-200 dark:border-brand-slate">
+                <div class="px-2 pt-2 pb-4 space-y-1 sm:px-3">
+                    <a href="#about" data-i18n="nav_about" class="block px-3 py-2 text-base font-medium text-gray-600 dark:text-gray-300 hover:text-brand-gold hover:bg-gray-100 dark:hover:bg-brand-slate rounded-md">About</a>
+                    <a href="#services" data-i18n="nav_services" class="block px-3 py-2 text-base font-medium text-gray-600 dark:text-gray-300 hover:text-brand-gold hover:bg-gray-100 dark:hover:bg-brand-slate rounded-md">Services</a>
+                    <a href="#value" data-i18n="nav_value" class="block px-3 py-2 text-base font-medium text-gray-600 dark:text-gray-300 hover:text-brand-gold hover:bg-gray-100 dark:hover:bg-brand-slate rounded-md">Value</a>
+                    <a href="#contact" data-i18n="nav_book" class="block px-3 py-2 text-base font-medium text-brand-gold hover:text-brand-goldHover rounded-md">Book a Session</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 2. Hero Section -->
+    <section class="hero-bg min-h-screen flex items-center pt-20 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full py-20">
+            <div class="max-w-3xl">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-brand-gold/30 bg-brand-gold/10 text-brand-gold text-sm font-medium mb-6">
+                    <i data-lucide="shield-check" class="w-4 h-4"></i>
+                    <span data-i18n="hero_badge">Ex-ABB Global Leadership Experience</span>
+                </div>
+                <h1 class="font-serif text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 text-gray-900 dark:text-white">
+                    <span data-i18n="hero_title_1">Scale Your B2B Sales with</span> <span class="gold-gradient-text italic" data-i18n="hero_title_2">30+ Years</span> <span data-i18n="hero_title_3">of Executive Industrial Experience.</span>
+                </h1>
+                <p data-i18n="hero_subtitle" class="text-xl md:text-2xl text-gray-600 dark:text-gray-400 mb-10 font-light max-w-2xl">
+                    Elite corporate mentorship tailored for CEOs and Sales Managers seeking strategic mastery and explosive revenue growth.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#contact" class="inline-flex justify-center items-center gap-2 bg-brand-gold hover:bg-brand-goldHover text-white dark:text-brand-dark px-8 py-4 rounded-sm font-bold text-lg transition-all shadow-[0_0_20px_rgba(197,160,89,0.3)] hover:shadow-[0_0_30px_rgba(197,160,89,0.5)]">
+                        <span data-i18n="hero_btn_primary">Book Strategy Session</span>
+                        <i data-lucide="calendar" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#about" class="inline-flex justify-center items-center gap-2 border border-gray-400 dark:border-gray-500 hover:border-gray-900 dark:hover:border-white text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white px-8 py-4 rounded-sm font-semibold text-lg transition-all bg-white/50 dark:bg-transparent hover:bg-white/80 dark:hover:bg-white/5 backdrop-blur-sm">
+                        <span data-i18n="hero_btn_secondary">View Expert Profile</span>
+                        <i data-lucide="arrow-down" class="w-5 h-5"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. About the Expert -->
+    <section id="about" class="py-24 bg-white dark:bg-brand-navy transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <!-- Image/Card -->
+                <div class="relative group">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-brand-gold to-brand-slate rounded-sm blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+                    <div class="relative aspect-[4/5] bg-gray-200 dark:bg-brand-slate rounded-sm overflow-hidden border border-gray-300 dark:border-gray-700">
+                        <!-- Portrait -->
+                        <img src="Images/Ediz.png" alt="Ediz Özdemir - Principal Consultant" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-6">
+                            <h3 class="font-serif text-2xl font-bold text-white">Ediz Özdemir</h3>
+                            <p class="text-brand-gold font-medium">Principal Consultant</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Bio -->
+                <div>
+                    <h2 data-i18n="about_subtitle" class="text-brand-gold font-semibold tracking-wider uppercase text-sm mb-2">The Core Asset</h2>
+                    <h3 data-i18n="about_title" class="font-serif text-4xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-white">Mastering the Art of the Enterprise Deal.</h3>
+                    <div class="space-y-6 text-gray-600 dark:text-gray-400 text-lg font-light leading-relaxed">
+                        <p data-i18n="about_p1">
+                            With over three decades of frontline and executive experience in industrial markets, I have navigated the complexities of global B2B deal structuring from the ground up to the boardroom.
+                        </p>
+                        <p data-i18n="about_p2">
+                            As the former <strong class="text-gray-900 dark:text-white font-medium">Sales General Director at ABB</strong>, I led enterprise sales teams across borders, driving multi-million dollar growth and establishing dominant market positions. My methodology isn't based on theory; it's forged in the fires of high-stakes corporate negotiations.
+                        </p>
+                        <p data-i18n="about_p3">
+                            Today, I partner exclusively with tech startups, young CEOs, and ambitious sales managers to distill 30+ years of hard-won knowledge into actionable, revenue-generating strategies.
+                        </p>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-6 mt-10 border-t border-gray-200 dark:border-brand-slate pt-10">
+                        <div>
+                            <div data-i18n="about_stat1_val" class="text-4xl font-serif text-gray-900 dark:text-white mb-1">30+</div>
+                            <div data-i18n="about_stat1_lbl" class="text-sm text-brand-gold uppercase tracking-wider font-semibold">Years Experience</div>
+                        </div>
+                        <div>
+                            <div data-i18n="about_stat2_val" class="text-4xl font-serif text-gray-900 dark:text-white mb-1">Global</div>
+                            <div data-i18n="about_stat2_lbl" class="text-sm text-brand-gold uppercase tracking-wider font-semibold">Deal Structuring</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Value Proposition -->
+    <section id="value" class="py-24 bg-brand-graylight dark:bg-brand-dark transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 data-i18n="value_subtitle" class="text-brand-gold font-semibold tracking-wider uppercase text-sm mb-2">Why OZCONSULT</h2>
+                <h3 data-i18n="value_title" class="font-serif text-4xl font-bold text-gray-900 dark:text-white">The Executive Advantage</h3>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="glass p-10 rounded-sm hover:-translate-y-2 transition-transform duration-300">
+                    <div class="w-14 h-14 bg-brand-gold/10 rounded-full flex items-center justify-center mb-6 border border-brand-gold/20">
+                        <i data-lucide="target" class="w-7 h-7 text-brand-gold"></i>
+                    </div>
+                    <h4 data-i18n="val1_title" class="text-xl font-bold text-gray-900 dark:text-white mb-4">Zero Fluff, All Strategy</h4>
+                    <p data-i18n="val1_desc" class="text-gray-600 dark:text-gray-400 font-light leading-relaxed">
+                        No generic advice. We focus strictly on data-driven, tactical execution that directly impacts your pipeline, closing rates, and bottom line.
+                    </p>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="glass p-10 rounded-sm hover:-translate-y-2 transition-transform duration-300">
+                    <div class="w-14 h-14 bg-brand-gold/10 rounded-full flex items-center justify-center mb-6 border border-brand-gold/20">
+                        <i data-lucide="swords" class="w-7 h-7 text-brand-gold"></i>
+                    </div>
+                    <h4 data-i18n="val2_title" class="text-xl font-bold text-gray-900 dark:text-white mb-4">Battle-Tested Frameworks</h4>
+                    <p data-i18n="val2_desc" class="text-gray-600 dark:text-gray-400 font-light leading-relaxed">
+                        Leverage the exact sales methodologies and negotiation frameworks utilized at the highest levels of global industrial conglomerates like ABB.
+                    </p>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="glass p-10 rounded-sm hover:-translate-y-2 transition-transform duration-300">
+                    <div class="w-14 h-14 bg-brand-gold/10 rounded-full flex items-center justify-center mb-6 border border-brand-gold/20">
+                        <i data-lucide="network" class="w-7 h-7 text-brand-gold"></i>
+                    </div>
+                    <h4 data-i18n="val3_title" class="text-xl font-bold text-gray-900 dark:text-white mb-4">Exclusive Executive Network</h4>
+                    <p data-i18n="val3_desc" class="text-gray-600 dark:text-gray-400 font-light leading-relaxed">
+                        Gain insights into how enterprise buyers think, operate, and make decisions by tapping into decades of high-level industrial networking.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Services & Packages -->
+    <section id="services" class="py-24 bg-white dark:bg-brand-navy relative overflow-hidden transition-colors duration-300">
+        <!-- Decorative bg elements -->
+        <div class="absolute top-0 right-0 w-1/2 h-1/2 bg-brand-gold/5 blur-[120px] rounded-full pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 w-1/2 h-1/2 bg-gray-200 dark:bg-brand-slate/50 blur-[120px] rounded-full pointer-events-none"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 data-i18n="services_subtitle" class="text-brand-gold font-semibold tracking-wider uppercase text-sm mb-2">Our Offerings</h2>
+                <h3 data-i18n="services_title" class="font-serif text-4xl font-bold text-gray-900 dark:text-white mb-4">Strategic Engagements</h3>
+                <p data-i18n="services_desc" class="text-gray-600 dark:text-gray-400 font-light">Tailored consulting packages designed to elevate your sales operations from foundational to enterprise-grade.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Package 1 -->
+                <div class="bg-gray-50 dark:bg-brand-dark border border-gray-200 dark:border-brand-slate rounded-sm p-8 flex flex-col hover:border-brand-gold/50 transition-colors duration-300">
+                    <div class="mb-8">
+                        <h4 data-i18n="srv1_title" class="text-2xl font-serif font-bold text-gray-900 dark:text-white mb-2">1-on-1 Mentorship</h4>
+                        <p data-i18n="srv1_sub" class="text-sm text-brand-gold uppercase tracking-wider font-medium mb-6">For CEOs & Managers</p>
+                        <p data-i18n="srv1_desc" class="text-gray-600 dark:text-gray-400 font-light text-sm h-16">Direct hourly coaching to navigate complex deals, leadership challenges, and immediate tactical needs.</p>
+                    </div>
+                    <ul class="space-y-4 mb-8 flex-grow">
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check" class="w-5 h-5 text-brand-gold shrink-0 mt-0.5"></i>
+                            <span data-i18n="srv1_f1" class="text-gray-700 dark:text-gray-300 text-sm">Personalized strategy sessions</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check" class="w-5 h-5 text-brand-gold shrink-0 mt-0.5"></i>
+                            <span data-i18n="srv1_f2" class="text-gray-700 dark:text-gray-300 text-sm">Live deal negotiation coaching</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check" class="w-5 h-5 text-brand-gold shrink-0 mt-0.5"></i>
+                            <span data-i18n="srv1_f3" class="text-gray-700 dark:text-gray-300 text-sm">Leadership & mindset development</span>
+                        </li>
+                    </ul>
+                    <a href="#contact" data-i18n="srv1_btn" class="w-full text-center border border-brand-gold text-brand-gold hover:bg-brand-gold hover:text-white dark:hover:text-brand-dark py-3 rounded-sm font-semibold transition-all">Reserve Spot</a>
+                </div>
+                
+                <!-- Package 2 (Highlighted) -->
+                <div class="bg-white dark:bg-gradient-to-b dark:from-brand-slate dark:to-brand-dark border-2 border-brand-gold rounded-sm p-8 flex flex-col relative transform md:-translate-y-4 shadow-2xl shadow-brand-gold/10">
+                    <div data-i18n="srv2_badge" class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-brand-gold text-white dark:text-brand-dark px-4 py-1 text-xs font-bold uppercase tracking-wider rounded-sm">Most Popular</div>
+                    <div class="mb-8 mt-2">
+                        <h4 data-i18n="srv2_title" class="text-2xl font-serif font-bold text-gray-900 dark:text-white mb-2">Sales Strategy Check-Up</h4>
+                        <p data-i18n="srv2_sub" class="text-sm text-brand-gold uppercase tracking-wider font-medium mb-6">Pipeline Deep Dive</p>
+                        <p data-i18n="srv2_desc" class="text-gray-600 dark:text-gray-400 font-light text-sm h-16">A comprehensive audit of your current sales processes, identifying leaks and uncovering hidden revenue.</p>
+                    </div>
+                    <ul class="space-y-4 mb-8 flex-grow">
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check" class="w-5 h-5 text-brand-gold shrink-0 mt-0.5"></i>
+                            <span data-i18n="srv2_f1" class="text-gray-700 dark:text-gray-300 text-sm">Full sales funnel analysis</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check" class="w-5 h-5 text-brand-gold shrink-0 mt-0.5"></i>
+                            <span data-i18n="srv2_f2" class="text-gray-700 dark:text-gray-300 text-sm">Team performance evaluation</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check" class="w-5 h-5 text-brand-gold shrink-0 mt-0.5"></i>
+                            <span data-i18n="srv2_f3" class="text-gray-700 dark:text-gray-300 text-sm">Actionable restructuring roadmap</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check" class="w-5 h-5 text-brand-gold shrink-0 mt-0.5"></i>
+                            <span data-i18n="srv2_f4" class="text-gray-700 dark:text-gray-300 text-sm">KPI & metrics optimization</span>
+                        </li>
+                    </ul>
+                    <a href="#contact" data-i18n="srv2_btn" class="w-full text-center bg-brand-gold hover:bg-brand-goldHover text-white dark:text-brand-dark py-3 rounded-sm font-bold transition-all">Request Audit</a>
+                </div>
+                
+                <!-- Package 3 -->
+                <div class="bg-gray-50 dark:bg-brand-dark border border-gray-200 dark:border-brand-slate rounded-sm p-8 flex flex-col hover:border-brand-gold/50 transition-colors duration-300">
+                    <div class="mb-8">
+                        <h4 data-i18n="srv3_title" class="text-2xl font-serif font-bold text-gray-900 dark:text-white mb-2">Industrial Advisory</h4>
+                        <p data-i18n="srv3_sub" class="text-sm text-brand-gold uppercase tracking-wider font-medium mb-6">Long-term Partnership</p>
+                        <p data-i18n="srv3_desc" class="text-gray-600 dark:text-gray-400 font-light text-sm h-16">Retained strategic advisory for enterprise companies executing complex, multi-stakeholder industrial deals.</p>
+                    </div>
+                    <ul class="space-y-4 mb-8 flex-grow">
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check" class="w-5 h-5 text-brand-gold shrink-0 mt-0.5"></i>
+                            <span data-i18n="srv3_f1" class="text-gray-700 dark:text-gray-300 text-sm">Board-level strategic guidance</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check" class="w-5 h-5 text-brand-gold shrink-0 mt-0.5"></i>
+                            <span data-i18n="srv3_f2" class="text-gray-700 dark:text-gray-300 text-sm">Key account growth structuring</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check" class="w-5 h-5 text-brand-gold shrink-0 mt-0.5"></i>
+                            <span data-i18n="srv3_f3" class="text-gray-700 dark:text-gray-300 text-sm">Market entry & expansion tactics</span>
+                        </li>
+                    </ul>
+                    <a href="#contact" data-i18n="srv3_btn" class="w-full text-center border border-brand-gold text-brand-gold hover:bg-brand-gold hover:text-white dark:hover:text-brand-dark py-3 rounded-sm font-semibold transition-all">Discuss Partnership</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Contact & Scheduling -->
+    <section id="contact" class="py-24 bg-brand-graylight dark:bg-brand-dark border-t border-gray-200 dark:border-brand-slate transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                <!-- Info -->
+                <div>
+                    <h2 data-i18n="contact_subtitle" class="text-brand-gold font-semibold tracking-wider uppercase text-sm mb-2">Initiate Contact</h2>
+                    <h3 data-i18n="contact_title" class="font-serif text-4xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-white">Let's Discuss Your Growth Trajectory.</h3>
+                    <p data-i18n="contact_desc" class="text-gray-600 dark:text-gray-400 font-light text-lg mb-8 leading-relaxed">
+                        Whether you need an immediate strategy overhaul or a trusted advisor for an upcoming enterprise negotiation, the first step is a confidential discovery session.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-white dark:bg-brand-slate flex items-center justify-center rounded-sm border border-gray-200 dark:border-gray-700">
+                                <i data-lucide="mail" class="w-5 h-5 text-brand-gold"></i>
+                            </div>
+                            <div>
+                                <p data-i18n="contact_email_lbl" class="text-sm text-gray-500 dark:text-gray-400">Direct Email</p>
+                                <p class="text-gray-900 dark:text-white font-medium">contact@ozconsult.com</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-white dark:bg-brand-slate flex items-center justify-center rounded-sm border border-gray-200 dark:border-gray-700">
+                                <i data-lucide="map-pin" class="w-5 h-5 text-brand-gold"></i>
+                            </div>
+                            <div>
+                                <p data-i18n="contact_loc_lbl" class="text-sm text-gray-500 dark:text-gray-400">Operating Globally</p>
+                                <p data-i18n="contact_loc_val" class="text-gray-900 dark:text-white font-medium">Remote & On-site Available</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Form / Calendly Placeholder -->
+                <div class="glass p-8 rounded-sm">
+                    <h4 data-i18n="form_title" class="text-2xl font-serif font-bold text-gray-900 dark:text-white mb-6">Request a Consultation</h4>
+                    <form class="space-y-4" onsubmit="event.preventDefault(); alert('In a production environment, this would submit to your backend or open Calendly.');">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="space-y-1">
+                                <label for="firstName" data-i18n="form_fname" class="text-sm text-gray-600 dark:text-gray-400 font-medium">First Name</label>
+                                <input type="text" id="firstName" class="w-full bg-white dark:bg-brand-navy border border-gray-300 dark:border-gray-700 rounded-sm px-4 py-3 text-gray-900 dark:text-white focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold transition-colors" placeholder="John" required>
+                            </div>
+                            <div class="space-y-1">
+                                <label for="lastName" data-i18n="form_lname" class="text-sm text-gray-600 dark:text-gray-400 font-medium">Last Name</label>
+                                <input type="text" id="lastName" class="w-full bg-white dark:bg-brand-navy border border-gray-300 dark:border-gray-700 rounded-sm px-4 py-3 text-gray-900 dark:text-white focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold transition-colors" placeholder="Doe" required>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-1">
+                            <label for="email" data-i18n="form_email" class="text-sm text-gray-600 dark:text-gray-400 font-medium">Corporate Email</label>
+                            <input type="email" id="email" class="w-full bg-white dark:bg-brand-navy border border-gray-300 dark:border-gray-700 rounded-sm px-4 py-3 text-gray-900 dark:text-white focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold transition-colors" placeholder="john@company.com" required>
+                        </div>
+                        
+                        <div class="space-y-1">
+                            <label for="inquiry" data-i18n="form_inquiry" class="text-sm text-gray-600 dark:text-gray-400 font-medium">Area of Interest</label>
+                            <select id="inquiry" class="w-full bg-white dark:bg-brand-navy border border-gray-300 dark:border-gray-700 rounded-sm px-4 py-3 text-gray-900 dark:text-white focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold transition-colors appearance-none">
+                                <option value="mentorship">1-on-1 Mentorship</option>
+                                <option value="audit">Sales Strategy Check-Up</option>
+                                <option value="advisory">Industrial Advisory</option>
+                                <option value="other">Other Inquiry</option>
+                            </select>
+                        </div>
+                        
+                        <div class="space-y-1">
+                            <label for="message" data-i18n="form_msg" class="text-sm text-gray-600 dark:text-gray-400 font-medium">Message (Brief context)</label>
+                            <textarea id="message" data-i18n="form_msg" rows="4" class="w-full bg-white dark:bg-brand-navy border border-gray-300 dark:border-gray-700 rounded-sm px-4 py-3 text-gray-900 dark:text-white focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold transition-colors resize-none" placeholder="Tell us about your current sales challenges..."></textarea>
+                        </div>
+                        
+                        <button type="submit" data-i18n="form_submit" class="w-full bg-brand-gold hover:bg-brand-goldHover text-white dark:text-brand-dark py-4 rounded-sm font-bold text-lg transition-all mt-4">
+                            Submit Request
+                        </button>
+                    </form>
+                    
+                    <div class="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700 text-center">
+                        <p data-i18n="form_alt" class="text-sm text-gray-500 dark:text-gray-400 mb-4">Prefer to schedule directly?</p>
+                        <button class="inline-flex items-center gap-2 border border-brand-gold text-brand-gold hover:bg-brand-gold hover:text-white dark:hover:text-brand-dark px-6 py-2 rounded-sm font-semibold transition-all text-sm">
+                            <i data-lucide="calendar" class="w-4 h-4"></i>
+                            <span data-i18n="form_calendly">Open Calendly</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. Footer -->
+    <footer class="bg-gray-100 dark:bg-[#050810] py-12 border-t border-gray-200 dark:border-brand-slate/50 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex flex-col items-center md:items-start">
+                <a href="#" class="font-serif text-2xl font-bold tracking-wider text-gray-900 dark:text-white mb-2">
+                    OZ<span class="text-brand-gold">CONSULT</span>
+                </a>
+                <p data-i18n="footer_desc" class="text-gray-500 text-sm">Executive B2B Sales Consulting & Advisory</p>
+            </div>
+            
+            <div class="flex items-center space-x-6">
+                <a href="https://www.linkedin.com/in/ediz-ozdemir-77804415/" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-brand-gold transition-colors" aria-label="LinkedIn">
+                    <i data-lucide="linkedin" class="w-6 h-6"></i>
+                </a>
+                <a href="#" class="text-gray-500 hover:text-brand-gold transition-colors" aria-label="Twitter">
+                    <i data-lucide="twitter" class="w-6 h-6"></i>
+                </a>
+            </div>
+            
+            <div class="text-gray-500 text-sm text-center md:text-right">
+                <p>&copy; <span id="year"></span> <span data-i18n="footer_rights">OZCONSULT. All rights reserved.</span></p>
+                <div class="mt-1 space-x-3">
+                    <a href="#" data-i18n="footer_privacy" class="hover:text-gray-900 dark:hover:text-white transition-colors">Privacy Policy</a>
+                    <span>|</span>
+                    <a href="#" data-i18n="footer_terms" class="hover:text-gray-900 dark:hover:text-white transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="translations.js"></script>
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+        
+        // Set current year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                navbar.classList.add('shadow-lg');
+                navbar.querySelector('.glass').classList.add('bg-white/90', 'dark:bg-brand-dark/90');
+                navbar.querySelector('.glass').classList.remove('border-b');
+            } else {
+                navbar.classList.remove('shadow-lg');
+                navbar.querySelector('.glass').classList.remove('bg-white/90', 'dark:bg-brand-dark/90');
+                navbar.querySelector('.glass').classList.add('border-b');
+            }
+        });
+
+        // Mobile menu toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu on link click
+        menu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+
+        // --- Theme Toggle Logic ---
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const themeToggleBtnMob = document.getElementById('theme-toggle-mobile');
+        const themeIconMob = document.getElementById('theme-icon-mobile');
+        const htmlEl = document.documentElement;
+
+        function updateThemeIcons() {
+            const isDark = htmlEl.classList.contains('dark');
+            const iconName = isDark ? 'sun' : 'moon';
+            
+            themeToggleBtn.innerHTML = `<i data-lucide="${iconName}" id="theme-icon" class="w-5 h-5"></i>`;
+            themeToggleBtnMob.innerHTML = `<i data-lucide="${iconName}" id="theme-icon-mobile" class="w-5 h-5"></i>`;
+            lucide.createIcons();
+        }
+
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            htmlEl.classList.add('dark');
+        } else {
+            htmlEl.classList.remove('dark');
+        }
+        updateThemeIcons();
+
+        function toggleTheme() {
+            htmlEl.classList.toggle('dark');
+            localStorage.theme = htmlEl.classList.contains('dark') ? 'dark' : 'light';
+            updateThemeIcons();
+        }
+
+        themeToggleBtn.addEventListener('click', toggleTheme);
+        themeToggleBtnMob.addEventListener('click', toggleTheme);
+
+        // --- Language Switcher Logic ---
+        const langSwitcher = document.getElementById('lang-switcher');
+        const langSwitcherMob = document.getElementById('lang-switcher-mobile');
+        const savedLang = localStorage.getItem('preferredLanguage') || 'en';
+        
+        langSwitcher.value = savedLang;
+        langSwitcherMob.value = savedLang;
+        changeLanguage(savedLang); // From translations.js
+
+        langSwitcher.addEventListener('change', (e) => {
+            langSwitcherMob.value = e.target.value;
+            changeLanguage(e.target.value);
+        });
+        
+        langSwitcherMob.addEventListener('change', (e) => {
+            langSwitcher.value = e.target.value;
+            changeLanguage(e.target.value);
+        });
+    </script>
+</body>
+</html>
